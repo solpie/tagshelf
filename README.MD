@@ -3,6 +3,7 @@
 ## Project setup
 ```
 npm install
+vue add electron-builder
 ```
 
 ### Compiles and hot-reloads for development
