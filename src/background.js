@@ -9,7 +9,6 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
 const { ipcMain } = require('electron')
-
 ipcMain.on('ondragstart', (event, filePath) => {
   event.sender.startDrag({
     file: filePath,

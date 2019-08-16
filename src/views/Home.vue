@@ -1,13 +1,17 @@
 <template>
-  <Shelf />
+  <v-layout>
+    <Tag />
+    <Shelf />
+  </v-layout>
 </template>
 
 <script>
-import Shelf from '../components/Shelf';
-
+import Shelf from "../components/Shelf";
+import Tag from "../components/Tag";
 export default {
   components: {
-    Shelf,
-  },
+    Tag,
+    Shelf
+  }
 };
 </script>

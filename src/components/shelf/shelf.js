@@ -1,4 +1,4 @@
-import { TagNKI } from '../../utils/TagNKI';
+import { TagNKI } from '../../utils/tagNKI';
 
 export default {
     data: () => ({
@@ -7,13 +7,13 @@ export default {
         item: ''
     }),
     mounted: function () {
-        document.getElementById("drag").ondragstart = event => {
-            event.preventDefault()
-            ipcRenderer.send("ondragstart", "C:\\test.nki")
-        }
+        // document.getElementById("drag").ondragstart = event => {
+        //     event.preventDefault()
+        //     ipcRenderer.send("ondragstart", "C:\\test.nki")
+        // }
 
         if (is_test) {
-            // walk_nki('C:/Users/lrw/Downloads/', this.items)
+            walk_nki('C:/Users/lrw/Downloads/', this.items)
         }
     },
     methods: {
@@ -21,8 +21,19 @@ export default {
             event.preventDefault()
             ipcRenderer.send("ondragstart", nki_path)
         },
+        allowDrop(event, nki_path) {
+            event.preventDefault()
+        },
+        drop(event, tagNKI) {
+            event.preventDefault()
+            let tag = event.dataTransfer.getData("tag")
+            if (tag) {
+                tagNKI.drop_tag(tag)
+            }
+            console.log('on drop tag', event)
+        },
         on_walk_kontakt_dir() {
-            console.log('on_walk',this.kontakt_dir_1)
+            console.log('on_walk', this.kontakt_dir_1)
             this.items = []
             walk_nki(this.kontakt_dir_1, this.items)
         }
