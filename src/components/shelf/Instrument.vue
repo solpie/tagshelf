@@ -1,9 +1,9 @@
 <template>
-  <v-card>
+  <div class="text-center">
     <v-chip>{{ext}}</v-chip>
     {{name}}
-    <v-chip v-for="(tag, i) in tag_arr" :key="i">{{tag}}</v-chip>
-  </v-card>
+    <v-chip small v-for="(tag, i) in tag_arr" :key="i">{{tag}}</v-chip>
+  </div>
 </template>
 
 <script>

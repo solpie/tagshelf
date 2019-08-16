@@ -6,6 +6,16 @@ export default {
     },
     data: () => ({
         kontakt_dir_1: '',
+        nodes: [{
+            text: 'User',
+            disabled: false,
+            href: 'breadcrumbs_dashboard',
+        },
+        {
+            text: 'lrw',
+            disabled: false,
+            href: 'breadcrumbs_dashboard',
+        }],
         items: [],
         item: ''
     }),
@@ -20,9 +30,20 @@ export default {
         }
     },
     methods: {
-        on_drag_nki(event, nki_path) {
+        on_drag_nki(event, tagNKI) {
             event.preventDefault()
-            ipcRenderer.send("ondragstart", nki_path)
+            this.update_path_nodes(tagNKI)
+            ipcRenderer.send("ondragstart", tagNKI.path)
+        },
+        update_path_nodes(tagNKI) {
+            this.nodes = []
+            for (let n of tagNKI.nodes()) {
+                this.nodes.push({
+                    text: n,
+                    disabled: false,
+                    href: 'breadcrumbs_dashboard',
+                })
+            }
         },
         allowDrop(event, nki_path) {
             event.preventDefault()

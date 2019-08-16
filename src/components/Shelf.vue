@@ -1,45 +1,46 @@
 <template>
-  <v-container>
-    <v-layout row>
+    <div>
       <!-- <a href="#" id="drag">NKI Drag</a> -->
-      <v-flex xs12>
+     <v-flex xs12>
         <v-flex ms4>
           <v-btn @click="on_walk_kontakt_dir">scan</v-btn>
         </v-flex>
         <v-flex ms4>
           <v-text-field v-model="kontakt_dir_1" label="kontakt dir:"></v-text-field>
         </v-flex>
-      </v-flex>
+      </v-flex> 
       <Instrument name="test.nki" ext=".nki" :tag_arr="['guitar','piano']" />
 
-      <v-card class="mx-auto" min-width="800" tile>
+      <v-card class="mx-auto" min-width="300" >
         <v-list dense>
-          <v-subheader>Instruments Shelf</v-subheader>
+          <v-subheader>Instruments Shelf
+              <v-breadcrumbs :items="nodes"></v-breadcrumbs>
+          </v-subheader>
           <v-list-item-group v-model="item" color="primary">
             <v-list-item v-for="(item, i) in items" :key="i">
               <v-list-item-icon>
-                <v-chip>{{item.ext}}</v-chip>
+                <v-chip :draggable="true">{{item.ext}}</v-chip>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title
+                  large
                   v-text="item.filename"
-                  v-on:dragstart="on_drag_nki($event,item.path)"
+                  v-on:dragstart="on_drag_nki($event,item)"
                   :draggable="true"
                   v-on:drop="drop($event,item)"
                   v-on:dragover="allowDrop($event)"
                 ></v-list-item-title>
 
                 <v-list-item-subtitle>
-                  <v-clip v-for="(tag, i) in item.tag_arr" :key="i">{{tag}},</v-clip>
+                  <v-chip x-small v-for="(tag, i) in item.tag_arr" :key="i">{{tag}}</v-chip>
                 </v-list-item-subtitle>
-                <!-- <a href="#" v-on:dragstart="on_drag_nki(event,item.path)">{{item.filename}}</a> -->
+              
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
         </v-list>
       </v-card>
-    </v-layout>
-  </v-container>
+    </div>
 </template>
 
 <script src='./shelf/shelf.js'></script>
