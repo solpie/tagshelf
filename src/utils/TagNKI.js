@@ -1,5 +1,6 @@
 class TagNKI {
     // filename
+    // ext
     constructor(path, tag_arr) {
         this.path = path;
         this.tag_arr = tag_arr;

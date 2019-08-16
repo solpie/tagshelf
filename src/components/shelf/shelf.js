@@ -1,6 +1,9 @@
 import { TagNKI } from '../../utils/tagNKI';
-
+import Instrument from "./Instrument";
 export default {
+    components: {
+        Instrument,
+    },
     data: () => ({
         kontakt_dir_1: '',
         items: [],
@@ -49,24 +52,26 @@ let walk_nki = (dir, nki_arr) => {
     console.log(nki_arr)
 }
 var fs = fs || require('fs')
+var path = path || require('path');
+
 let is_ext = (str, ext) => {
-    return str.substring(str.length - 4).toLowerCase() == ext
+    return path.extname(str).toLowerCase() == ext
 }
 var walkSync = function (dir, filelist) {
-    var path = path || require('path');
-    var fs = fs || require('fs'),
-        files = fs.readdirSync(dir);
+    var files = fs.readdirSync(dir);
     filelist = filelist || [];
     files.forEach(function (file) {
         if (fs.statSync(path.join(dir, file)).isDirectory()) {
             filelist = walkSync(path.join(dir, file), filelist);
         }
         else {
+
             if (is_ext(file, '.nki') ||
                 is_ext(file, '.nkm')) {
                 let nki_path = path.join(dir, file)
                 let tagnki = new TagNKI(nki_path, [])
                 tagnki.filename = file
+                tagnki.ext = path.extname(file)
                 filelist.push(tagnki);
             }
         }

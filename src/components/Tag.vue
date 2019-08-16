@@ -1,5 +1,6 @@
 <template>
-  <v-expansion-panels accordion small>
+  <v-expansion-panels accordion small
+    :multiple="true">
     <v-expansion-panel v-for="(item,i) in categories" :key="i">
       <v-expansion-panel-header>{{item.name}}</v-expansion-panel-header>
       <v-expansion-panel-content>
