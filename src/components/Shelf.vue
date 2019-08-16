@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      <a href="#" id="drag">NKI Drag out</a>
+      <a href="#" id="drag">NKI Drag</a>
     </v-layout>
   </v-container>
 </template>
